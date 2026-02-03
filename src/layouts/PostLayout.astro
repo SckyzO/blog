@@ -3,32 +3,101 @@ import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getReadingTime } from '../utils/readingTime';
+import type { MarkdownHeading } from 'astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
+    headings?: MarkdownHeading[];
 }
 
-const { post } = Astro.props;
+const { post, headings = [] } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage } = post.data;
+const readingTime = getReadingTime(post.body ?? "");
 ---
 
 <BaseLayout title={title} description={description}>
     <Header slot="header" />
-	<article class="prose lg:prose-xl mx-auto">
-		{heroImage && <img width={1020} height={510} src={heroImage} alt="" class="rounded-xl shadow-lg mb-8" />}
-		<h1 class="text-4xl font-bold mb-2">{title}</h1>
-		<div class="text-sm text-gray-500 mb-8 flex gap-4">
-			<time datetime={pubDate.toISOString()}>
-				Publié le : {pubDate.toLocaleDateString('fr-FR')}
-			</time>
-			{updatedDate && (
-				<div class="italic">
-					Mis à jour le : {updatedDate.toLocaleDateString('fr-FR')}
-				</div>
-			)}
-		</div>
-		<div class="divider"></div>
-		<slot />
-	</article>
+    
+    <div class="drawer lg:drawer-open container mx-auto">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        
+        <div class="drawer-content flex flex-col">
+            {/* Contenu principal */}
+            <article class="prose lg:prose-xl mx-auto px-4 w-full max-w-4xl">
+                {heroImage && <img width={1020} height={510} src={heroImage} alt="" class="rounded-xl shadow-lg mb-8 w-full object-cover" />}
+                
+                <h1 class="text-4xl font-bold mb-2">{title}</h1>
+                
+                <div class="flex flex-wrap gap-4 text-sm text-gray-500 mb-8 items-center bg-base-200 p-4 rounded-lg">
+                    <div class="flex items-center gap-2">
+                        <span>📅 Publié le :</span>
+                        <time datetime={pubDate.toISOString()}>
+                            {pubDate.toLocaleDateString('fr-FR')}
+                        </time>
+                    </div>
+                    
+                    {updatedDate && (
+                        <div class="flex items-center gap-2">
+                            <span>🔄 Mis à jour :</span>
+                            <div>{updatedDate.toLocaleDateString('fr-FR')}</div>
+                        </div>
+                    )}
+
+                    <div class="badge badge-primary badge-outline gap-1">
+                        ⏱️ {readingTime} de lecture
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                
+                {/* TOC Mobile (visible uniquement sur petit écran) */}
+                <div class="lg:hidden collapse collapse-arrow bg-base-200 mb-8">
+                    <input type="checkbox" /> 
+                    <div class="collapse-title text-xl font-medium">
+                        Table des matières
+                    </div>
+                    <div class="collapse-content"> 
+                        <ul class="menu menu-sm bg-base-200 rounded-box">
+                            {headings.map((heading) => (
+                                <li class={`pl-${(heading.depth - 1) * 2}`}>
+                                    <a href={`#${heading.slug}`}>{heading.text}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <slot />
+            </article>
+        </div>
+
+        {/* Sidebar TOC Desktop (Sticky) */}
+        <div class="drawer-side lg:h-auto z-10 hidden lg:block" style="position: sticky; top: 100px; height: fit-content; align-self: start;">
+            {/* Linter override: DaisyUI drawer implementation */}
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
+            <aside class="w-64 p-4 min-h-full">
+                {headings.length > 0 && (
+                    <div class="bg-base-100 p-4 rounded-xl shadow-sm border border-base-200">
+                        <h3 class="font-bold text-lg mb-4">Dans cet article</h3>
+                        <ul class="menu menu-sm w-full p-0 [&_li>*]:py-1.5">
+                            {headings.map((heading) => (
+                                <li class="border-l border-base-200 hover:border-primary transition-colors">
+                                    <a 
+                                        href={`#${heading.slug}`} 
+                                        class={`block truncate ${heading.depth > 2 ? 'pl-6 text-gray-500' : 'font-medium'}`}
+                                    >
+                                        {heading.text}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </aside>
+        </div>
+    </div>
+
     <Footer slot="footer" />
 </BaseLayout>

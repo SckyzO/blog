@@ -1,10 +1,20 @@
 services:
+  # Service pour les tests automatisés (CI-like)
   test-suite:
     build:
       context: .
       dockerfile: Dockerfile.test
     volumes:
-      - ./reports:/app/reports # Persistance des rapports
+      - ./reports:/app/reports
     environment:
       - CI=true
     command: npm run test:all
+
+  # Service pour la prévisualisation locale (Human validation)
+  preview:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    ports:
+      - "4321:4321"
+    command: sh -c "npm run build && npm run preview -- --host"

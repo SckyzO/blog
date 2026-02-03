@@ -1,0 +1,4 @@
+
+> virtual-virgo@0.0.1 lint:css
+> stylelint 'src/**/*.css' -f json
+

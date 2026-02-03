@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "lint:css": "stylelint '**/*.css'",
+    "lint:css": "stylelint 'src/**/*.css'",
     "format": "prettier --write .",
     "check": "astro check && npm run lint && npm run lint:css",
     "test": "vitest",
@@ -24,10 +24,12 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@eslint/js": "^9.39.2",
     "@playwright/test": "^1.58.1",
     "@types/eslint__js": "^8.42.3",
     "eslint": "^9.39.2",
+    "eslint-formatter-junit": "^9.0.1",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-security": "^3.0.1",

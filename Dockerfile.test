@@ -1,6 +1,6 @@
 # Dockerfile.test
 # Image de base incluant Node.js et les navigateurs pour Playwright
-FROM mcr.microsoft.com/playwright:v1.50.1-noble
+FROM mcr.microsoft.com/playwright:v1.58.1-noble
 
 WORKDIR /app
 

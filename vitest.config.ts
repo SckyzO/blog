@@ -2,6 +2,7 @@
 import { getViteConfig } from 'astro/config';
 
 export default getViteConfig({
+  // @ts-expect-error - Astro types don't include Vitest config yet
   test: {
     environment: 'happy-dom',
     include: ['src/**/*.test.{ts,tsx,js,jsx}'],

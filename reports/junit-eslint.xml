@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/e2e/example.spec.ts">
+<testcase time="0" name="/app/e2e/example.spec.ts" classname="/app/e2e/example.spec" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/components/Card.astro">
+<testcase time="0" name="/app/src/components/Card.astro" classname="/app/src/components/Card" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/components/Footer.astro">
+<testcase time="0" name="/app/src/components/Footer.astro" classname="/app/src/components/Footer" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/components/Header.astro">
+<testcase time="0" name="/app/src/components/Header.astro" classname="/app/src/components/Header" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/content/config.ts">
+<testcase time="0" name="/app/src/content/config.ts" classname="/app/src/content/config" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/layouts/BaseLayout.astro">
+<testcase time="0" name="/app/src/layouts/BaseLayout.astro" classname="/app/src/layouts/BaseLayout" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/layouts/PostLayout.astro">
+<testcase time="0" name="/app/src/layouts/PostLayout.astro" classname="/app/src/layouts/PostLayout" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/pages/[...page].astro">
+<testcase time="0" name="/app/src/pages/[...page].astro" classname="/app/src/pages/[...page]" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/pages/about.astro">
+<testcase time="0" name="/app/src/pages/about.astro" classname="/app/src/pages/about" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/pages/blog/[...slug].astro">
+<testcase time="0" name="/app/src/pages/blog/[...slug].astro" classname="/app/src/pages/blog/[...slug]" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/test/basic.test.ts">
+<testcase time="0" name="/app/src/test/basic.test.ts" classname="/app/src/test/basic.test" />
+</testsuite>
+<testsuite package="org.eslint" time="0" tests="1" errors="0" name="/app/src/utils/readingTime.ts">
+<testcase time="0" name="/app/src/utils/readingTime.ts" classname="/app/src/utils/readingTime" />
+</testsuite>
+</testsuites>
