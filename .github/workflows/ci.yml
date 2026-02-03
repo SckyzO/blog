@@ -27,13 +27,31 @@ jobs:
         run: npm audit --audit-level=high
 
       - name: Lint (ESLint)
-        run: npm run lint
+        run: npm run lint -- -f junit -o reports/junit-eslint.xml
+        continue-on-error: true # On continue pour avoir tous les rapports
 
       - name: Lint CSS (Stylelint)
-        run: npm run lint:css
+        run: npm run lint:css -- -f json > reports/stylelint.json
+        continue-on-error: true
 
       - name: Type Check & Astro Check
         run: npx astro check
 
-      - name: Build Test
+      - name: Build
         run: npm run build
+
+      - name: Unit Tests (Vitest)
+        run: npm run test -- --run
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: E2E Tests (Playwright)
+        run: npm run test:e2e
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: reports/

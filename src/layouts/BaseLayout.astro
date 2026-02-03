@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Blog Astro Tomzone" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" data-theme="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+        <!-- Sécurité : Headers de base via Meta pour le statique -->
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+		<title>{title}</title>
+	</head>
+	<body class="flex flex-col min-h-screen bg-base-100 text-base-content">
+		<slot name="header" />
+		<main class="flex-grow container mx-auto px-4 py-8">
+			<slot />
+		</main>
+		<slot name="footer" />
+	</body>
+</html>

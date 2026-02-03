@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "À Propos | Tomzone Blog";
+const description = "En savoir plus sur Tomzone et ce blog.";
+---
+
+<BaseLayout title={title} description={description}>
+    <Header slot="header" />
+    
+    <section class="prose lg:prose-xl mx-auto py-12">
+        <h1>À Propos</h1>
+        <p>
+            Bienvenue sur le <strong>Tomzone Blog</strong>. Ce projet est une démonstration technique d'une architecture moderne de blog statique.
+        </p>
+        
+        <h2>Notre Stack Technique</h2>
+        <ul>
+            <li><strong>Astro 5</strong> : Pour la performance et l'architecture "Islands".</li>
+            <li><strong>TailwindCSS 4</strong> : Pour le styling utilitaire rapide.</li>
+            <li><strong>DaisyUI 5</strong> : Pour des composants UI sémantiques et élégants.</li>
+            <li><strong>TypeScript</strong> : Pour la robustesse du code.</li>
+        </ul>
+
+        <h2>Qualité & Sécurité</h2>
+        <p>
+            Nous accordons une importance capitale à la qualité du code via :
+        </p>
+        <ul>
+            <li>Validation stricte des contenus (Zod).</li>
+            <li>Analyses statiques (ESLint, Stylelint).</li>
+            <li>Tests automatisés en environnements isolés (Docker).</li>
+        </ul>
+    </section>
+
+    <Footer slot="footer" />
+</BaseLayout>

@@ -11,7 +11,11 @@
     "lint": "eslint .",
     "lint:css": "stylelint '**/*.css'",
     "format": "prettier --write .",
-    "check": "astro check && npm run lint && npm run lint:css"
+    "check": "astro check && npm run lint && npm run lint:css",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:all": "npm run check:report && npm run test -- --run && npm run build && npm run test:e2e",
+    "check:report": "mkdir -p reports && npm run lint -- -f junit -o reports/junit-eslint.xml && npm run lint:css -- -f json > reports/stylelint.json && astro check"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -21,16 +25,19 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@playwright/test": "^1.58.1",
     "@types/eslint__js": "^8.42.3",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-security": "^3.0.1",
+    "happy-dom": "^20.5.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "stylelint": "^17.1.1",
     "stylelint-config-standard": "^40.0.0",
-    "typescript-eslint": "^8.54.0"
+    "typescript-eslint": "^8.54.0",
+    "vitest": "^4.0.18"
   }
 }

@@ -1,0 +1,17 @@
+# Dockerfile.test
+# Image de base incluant Node.js et les navigateurs pour Playwright
+FROM mcr.microsoft.com/playwright:v1.50.1-noble
+
+WORKDIR /app
+
+# Copie des fichiers de dépendances
+COPY package*.json ./
+
+# Installation propre des dépendances
+RUN npm ci
+
+# Copie du reste du projet
+COPY . .
+
+# Commande par défaut (peut être surchargée par docker-compose)
+CMD ["npm", "run", "test:ci"]

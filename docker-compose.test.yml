@@ -1,0 +1,10 @@
+services:
+  test-suite:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+      - ./reports:/app/reports # Persistance des rapports
+    environment:
+      - CI=true
+    command: npm run test:all

@@ -1,0 +1,42 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    pubDate: Date;
+    url: string;
+    image?: string;
+    tags?: string[];
+}
+
+const { title, description, pubDate, url, image, tags = [] } = Astro.props;
+---
+
+<div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+    {image && (
+        <figure>
+            <img src={image} alt={title} class="h-48 w-full object-cover" />
+        </figure>
+    )}
+    <div class="card-body">
+        <h2 class="card-title">
+            <a href={url} class="hover:underline hover:text-primary">
+                {title}
+            </a>
+            {/* Logique métier visuelle : Badge "Nouveau" si < 7 jours (exemple) */}
+            {new Date().getTime() - pubDate.getTime() < 7 * 24 * 60 * 60 * 1000 && (
+                <div class="badge badge-secondary">NEW</div>
+            )}
+        </h2>
+        <p class="text-gray-600 line-clamp-3">{description}</p>
+        
+        <div class="card-actions justify-end mt-4 items-center">
+            <div class="text-xs text-gray-400 mr-auto">
+                {pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </div>
+            {tags.map((tag) => (
+                <div class="badge badge-outline">{tag}</div>
+            ))}
+            <a href={url} class="btn btn-primary btn-sm">Lire</a>
+        </div>
+    </div>
+</div>

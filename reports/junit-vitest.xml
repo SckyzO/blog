@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="0" errors="0" time="0.001144419">
+    <testsuite name="src/test/basic.test.ts" timestamp="2026-02-03T21:35:07.051Z" hostname="Tom-PC" tests="1" failures="0" errors="0" skipped="0" time="0.001144419">
+        <testcase classname="src/test/basic.test.ts" name="Astro Blog Logic &gt; should be a placeholder test" time="0.000514593">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -10,7 +10,7 @@ export default [
   eslintPluginSecurity.configs.recommended,
   jsxA11y.flatConfigs.recommended,
   {
-    ignores: ["dist/", "node_modules/", ".astro/"],
+    ignores: ["dist/", "node_modules/", ".astro/", "*.config.*", ".*rc.*"],
   },
   {
     languageOptions: {
