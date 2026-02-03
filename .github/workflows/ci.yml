@@ -1,0 +1,39 @@
+name: CI - Quality & Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Code Quality & Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Security Audit (Dependencies)
+        run: npm audit --audit-level=high
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Lint CSS (Stylelint)
+        run: npm run lint:css
+
+      - name: Type Check & Astro Check
+        run: npx astro check
+
+      - name: Build Test
+        run: npm run build
